@@ -51,9 +51,9 @@ fn main() {
     }
 
     // After zero rolls, There is precisely one way to have zero Hs,
-    // and zero HHs. Whether you assume the next roll is heads or
-    // tails makes no difference.
+    // and zero HHs, whether you follow it with H or T.
     num_ways[0][0].heads = 1.0;
+    num_ways[0][0].tails = 1.0;
 
     // Iteratively calculate num_ways for increasing numbers of flips.
     for flip_num in 1..=NUM_FLIPS {
@@ -114,4 +114,32 @@ fn main() {
         }
         println!();
     }
+
+    ////////////////////////////////////////////////////////////////////////
+    // Now do some calculations!
+
+    // First, convert counts into probabilities.
+    let total = num_ways.iter().map(|row| row.iter().sum::<f64>()).sum::<f64>();
+    let probs = num_ways
+        .iter()
+        .map(|row| row.iter().map(|i| i / total).collect::<Vec<_>>())
+        .collect::<Vec<_>>();
+
+    // Calculate expectations of H, HH and HH/H.
+    let mut exp_h = 0.0;
+    let mut exp_hh = 0.0;
+    let mut exp_ratio = 0.0;
+    for i in 0..=NUM_FLIPS {
+	for j in 0..=NUM_FLIPS {
+	    let p = probs[i][j];
+	    exp_h += i as f64 * p;
+	    exp_hh += j as f64* p;
+	    if i > 0 {
+		exp_ratio += j as f64 / i as f64 * p;
+	    }
+	}
+    }
+    println!("\nE(H),{}", exp_h);
+    println!("E(HH),{}", exp_hh);
+    println!("E(HH/H),{}", exp_ratio);
 }
