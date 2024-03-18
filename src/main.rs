@@ -11,10 +11,10 @@ const NUM_FLIPS: usize = 10;
 // Print out extra debug info?
 const DEBUG: bool = false;
 
-// We count combinations, counting the number of combinations that end
-// in heads and tails separately. We use f64 as the numbers may get
-// large with large numbers of simulations (the number of combinations
-// grow exponentially).
+// We count sequences, counting the number of sequences that end in
+// heads and tails separately. We use f64 as the numbers may get large
+// with large numbers of simulations (the number of sequences grow
+// exponentially).
 #[derive(Clone, Copy, Debug)]
 struct Ways {
     heads: f64,
@@ -30,7 +30,7 @@ fn main() {
     // against a possible HH, so that the number of #HTs should be
     // #Hs - #HHs.
 
-    // num_ways[i][j] contains the number of combinations that
+    // num_ways[i][j] contains the number of sequencess that
     // contains i Hs, and j HHs in the extended-by-one sequence.
 
     // For example, after 3 rolls, the possibilities of having two
