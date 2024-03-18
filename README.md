@@ -65,7 +65,28 @@ $$
 \mathbb{E}(HH/H) = \sum_i \sum_j j / i \ P(H = i \wedge HH = j)
 $$
 
-**TODO: Calculate these values in code!**
+With $N = 10$, the code gives $\mathbb{E}(H) = 5$ and $\mathbb{E}(HH)
+= 2.5$, as you'd expect, and $\mathbb{E}(HH/H) \approx 0.45$.
 
-**TODO: Rearrange in terms of conditional expectations, compare, plot
-graph, explain, etc.**
+First I'll try to do some algebra to get some intuition around why
+$\mathbb{E}(HH/H)$ isn't half, and then do some calculations.
+
+$$
+\begin{array}{rcl}
+\mathbb{E}(HH) & = & \sum_i \sum_j j \ P(H = i \wedge HH = j) \\
+               & = & \sum_i \sum_j j \ P(HH = j \ | \ H = i) P(H = i) \\
+               & = & \sum_i P(H = i) \sum_j j \ P(HH = j \ | \ H = i) \\
+			   & = & \sum_i P(H = i) \mathbb{E}(HH \ | \ H = i)
+\end{array}
+$$
+
+$$
+\begin{array}{rcl}
+\mathbb{E}(HH/H) & = &  \sum_i \sum_j j / i \ P(H = i \wedge HH = j) \\
+                 & = &  \sum_i \sum_j j / i \ P(HH = j \ | \ H = i) P(H = i) \\
+				 & = &  \sum_i P(H = i) / i \sum_j j \ P(HH = j \ | \ H = i) \\
+                 & = &  \sum_i P(H = i) / i \mathbb{E}(HH \ | \ H = i)
+\end{array}
+$$
+
+**TODO: Explain all this. Plots, intuitive meaning, etc.**
