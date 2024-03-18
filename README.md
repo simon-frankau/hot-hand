@@ -85,8 +85,39 @@ $$
 \mathbb{E}(HH/H) & = &  \sum_i \sum_j j / i \ P(H = i \wedge HH = j) \\
                  & = &  \sum_i \sum_j j / i \ P(HH = j \ | \ H = i) P(H = i) \\
 				 & = &  \sum_i P(H = i) / i \sum_j j \ P(HH = j \ | \ H = i) \\
-                 & = &  \sum_i P(H = i) / i \mathbb{E}(HH \ | \ H = i)
+                 & = &  \sum_i P(H = i) / i \ \mathbb{E}(HH \ | \ H = i)
 \end{array}
 $$
 
-**TODO: Explain all this. Plots, intuitive meaning, etc.**
+What this means is that both $\mathbb{E}(HH)$ and $\mathbb{E}(HH/H)$
+can be thought of as weighted sums over the expectations of $HH$
+conditioned on $H$.
+
+For $\mathbb{E}(HH)$, the weights are simply the probabilities of the
+values of $H$, and the expectation for the number of $HH$ s comes out
+as 1/4 of the number of throws, as you would expect.
+
+For $\mathbb{E}(HH/H)$, the cases where $H$ is large is weighted
+less. If $H$ is high, you'd expect $HH$ to dominate over $HT$ (as most
+flips are heads!), so by weighing them less you'll decrease the
+expectation compared to $\mathbb{E}(HH) / \mathbb{E}(H)$.
+
+**TODO: Write code to calculate these probabilities and expectations,
+and then we can plot them.**
+
+## So what does this mean?
+
+This puts me in mind of change of numeraire: Depending on how you want
+to count things, you get different results.
+
+If, for a given number of coin flips, you want to place a bet that
+number of heads wfollowed by tils is greater than the number of head
+followed by heads, you'll likely come out ahead.
+
+If, for a given number of coin flips, every time a heads comes up, you
+bet the next coin will be a tails, you have a probability greater than
+a half of coming out ahead.
+
+*However*, in this second case, on average, you'll break even, because
+your losses will tend to be on sequences with more heads, so your
+losses when you lose tend to be larger than your wins when you win.
