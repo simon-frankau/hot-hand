@@ -109,8 +109,30 @@ inequality gives $\mathbb{E}(1/H) \geq 1 / \mathbb{E}(H)$, so we can't
 be sure exactly sure how $\mathbb{E}(HH/H)$ compares with
 $\mathbb{E}(HH/H) / \mathbb{E}(H)$.
 
-**TODO: Write code to calculate these probabilities and expectations,
-and then we can plot them.**
+### Visualising this
+
+I've added code to calculate $\mathbb{E}(HH \ | \ H = i)$, $P(H = i)$
+and $P(H = i) / i$, for the various $i$, so we can visualise the
+conditional expectation and the weights being applied:
+
+![Graph of these values. The conditional expectation is weighted
+highly to large values of H, while both sets of weights look
+normal-ish](./cond_exp.png)
+
+We can see the conditional expectations are highly skewed, so any skew
+in the weightings will have a significant effect on the weighted
+sum. On this scale, it's hard to compare the weightings, so let's
+normalise their heights and take another look:
+
+![Graphs of P(H = i) and P(H = i)/i, normalised and
+superimposed](./weights_compared.png)
+
+The graph of $P(H = i)$ is a plot of a straightforward binomial
+distribution, totally symmetric. We can see how dividing through by
+$i$ skews it - the biggest changes, multiplicatively, will be at the
+extremes, but they have very little weight. Even in the centre,
+though, we can see how dividing through by $i$ shifts the distribution
+leftwards, reducing the expectation for $\mathbb{E}(HH/H)$.
 
 ## So what does this mean?
 
