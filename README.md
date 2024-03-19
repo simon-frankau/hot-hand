@@ -20,7 +20,7 @@ This is not very clear, either, so I shall try to clarify.
 
 ## The result
 
-The result is that, if you flip a die $N$ times, the expectation of
+The result is that, if you flip a coin $N$ times, the expectation of
 the fraction of heads followed by another heads is less than the
 fraction of heads followed by a tails. It's not half!
 
@@ -28,7 +28,7 @@ Put another way, if $H$ is a random variable for the number of heads
 seen, and $HH$ is a random variable for the number of pairs of heads
 seen in the sequence, then $\mathbb{E}(HH/H) \neq 0.5$.
 
-The rest of this doc tries to explain what this is the case.
+The rest of this doc tries to explain why this is the case.
 
 ## The code
 
