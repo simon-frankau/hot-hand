@@ -102,6 +102,13 @@ less. If $H$ is high, you'd expect $HH$ to dominate over $HT$ (as most
 flips are heads!), so by weighing them less you'll decrease the
 expectation compared to $\mathbb{E}(HH) / \mathbb{E}(H)$.
 
+To put this much more succinctly, as a mathematician friend did, $H$
+and $HH$ are positively correlated, so we expect $\mathbb{E}(HH/H) <
+\mathbb{E}(HH) \mathbb{E}(1/H)$. On the other hand, Jensen's
+inequality gives $\mathbb{E}(1/H) \geq 1 / \mathbb{E}(H)$, so we can't
+be sure exactly sure how $\mathbb{E}(HH/H)$ compares with
+$\mathbb{E}(HH/H) / \mathbb{E}(H)$.
+
 **TODO: Write code to calculate these probabilities and expectations,
 and then we can plot them.**
 
