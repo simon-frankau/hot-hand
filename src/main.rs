@@ -6,7 +6,7 @@
 //
 
 // Number of flips we'll do the analysis over.
-const NUM_FLIPS: usize = 10;
+const NUM_FLIPS: usize = 30;
 
 // Print out extra debug info?
 const DEBUG: bool = false;
@@ -142,4 +142,33 @@ fn main() {
     println!("\nE(H),{}", exp_h);
     println!("E(HH),{}", exp_hh);
     println!("E(HH/H),{}", exp_ratio);
+
+    // Next, calculate (conditional) expectations, weights, etc.
+
+    // Track calculated numbers match what we calculated before, as a sanity check.
+    let mut grand_total = 0.0;
+    let mut exp_hh_again = 0.0;
+    let mut exp_ratio_again = 0.0;
+
+    println!("\ni,P(H=i),P(H=i)/i,E(HH | H=i)");
+    for i in 0..=NUM_FLIPS {
+	let mut total_prob = 0.0;
+	let mut expectation = 0.0;
+	for j in 0..=NUM_FLIPS {
+	    total_prob += probs[i][j];
+	    expectation += j as f64 * probs[i][j];
+	}
+	let cond_exp = expectation / total_prob;
+	let weight = if i > 0 { total_prob / i as f64 } else { 0.0 };
+	println!("{},{},{},{}", i, total_prob, weight, cond_exp);
+
+	grand_total += total_prob;
+	exp_hh_again += cond_exp * total_prob;
+	exp_ratio_again += cond_exp * weight;
+    }
+
+    // And perform those sanity checks.
+    assert!((grand_total - 1.0).abs() < 1e-7);
+    assert!((exp_hh_again - exp_hh).abs() < 1e-7);
+    assert!((exp_ratio_again - exp_ratio).abs() < 1e-7);
 }
