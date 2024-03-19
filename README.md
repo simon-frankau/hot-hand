@@ -56,7 +56,7 @@ $$
 
 $$
 \mathbb{E}(HH) = \sum_j j \ P(HH = j)
-                = \sum_i \sum_j j \ P(H = i \wedge HH = j)
+               = \sum_i \sum_j j \ P(H = i \wedge HH = j)
 $$
 
 So far so normal. We can do the same thing for $\mathbb{E}(HH/H)$:
@@ -111,7 +111,7 @@ This puts me in mind of change of numeraire: Depending on how you want
 to count things, you get different results.
 
 If, for a given number of coin flips, you want to place a bet that
-number of heads wfollowed by tils is greater than the number of head
+number of heads followed by tails is greater than the number of head
 followed by heads, you'll likely come out ahead.
 
 If, for a given number of coin flips, every time a heads comes up, you
