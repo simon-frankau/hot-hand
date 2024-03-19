@@ -107,7 +107,7 @@ and $HH$ are positively correlated, so we expect $\mathbb{E}(HH/H) <
 \mathbb{E}(HH) \mathbb{E}(1/H)$. On the other hand, Jensen's
 inequality gives $\mathbb{E}(1/H) \geq 1 / \mathbb{E}(H)$, so we can't
 be sure exactly sure how $\mathbb{E}(HH/H)$ compares with
-$\mathbb{E}(HH/H) / \mathbb{E}(H)$.
+$\mathbb{E}(HH) / \mathbb{E}(H)$.
 
 ### Visualising this
 
