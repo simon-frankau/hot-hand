@@ -109,6 +109,9 @@ inequality gives $\mathbb{E}(1/H) \geq 1 / \mathbb{E}(H)$, so we can't
 be sure exactly sure how $\mathbb{E}(HH/H)$ compares with
 $\mathbb{E}(HH) / \mathbb{E}(H)$.
 
+(For what it's worth, with 30 flips, $1 / \mathbb{E}(H)$ is 0.0666,
+and $\mathbb{E}(1/H)$ is 0.0692.)
+
 ### Visualising this
 
 I've added code to calculate $\mathbb{E}(HH \ | \ H = i)$, $P(H = i)$
@@ -150,3 +153,10 @@ a half of coming out ahead.
 *However*, in this second case, on average, you'll break even, because
 your losses will tend to be on sequences with more heads, so your
 losses when you lose tend to be larger than your wins when you win.
+
+## Notes
+
+$\mathbb{E}(HH/H)$ should really be $\mathbb{E}(HH/H \ | \ H \neq
+0)$. I have not made this adjustment. However, for reasonably large
+values of $N$ $P(H = 0)$ is tiny, so it should not have a significant
+effect on the results.

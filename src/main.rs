@@ -119,7 +119,10 @@ fn main() {
     // Now do some calculations!
 
     // First, convert counts into probabilities.
-    let total = num_ways.iter().map(|row| row.iter().sum::<f64>()).sum::<f64>();
+    let total = num_ways
+        .iter()
+        .map(|row| row.iter().sum::<f64>())
+        .sum::<f64>();
     let probs = num_ways
         .iter()
         .map(|row| row.iter().map(|i| i / total).collect::<Vec<_>>())
@@ -130,14 +133,14 @@ fn main() {
     let mut exp_hh = 0.0;
     let mut exp_ratio = 0.0;
     for i in 0..=NUM_FLIPS {
-	for j in 0..=NUM_FLIPS {
-	    let p = probs[i][j];
-	    exp_h += i as f64 * p;
-	    exp_hh += j as f64* p;
-	    if i > 0 {
-		exp_ratio += j as f64 / i as f64 * p;
-	    }
-	}
+        for j in 0..=NUM_FLIPS {
+            let p = probs[i][j];
+            exp_h += i as f64 * p;
+            exp_hh += j as f64 * p;
+            if i > 0 {
+                exp_ratio += j as f64 / i as f64 * p;
+            }
+        }
     }
     println!("\nE(H),{}", exp_h);
     println!("E(HH),{}", exp_hh);
@@ -152,23 +155,34 @@ fn main() {
 
     println!("\ni,P(H=i),P(H=i)/i,E(HH | H=i)");
     for i in 0..=NUM_FLIPS {
-	let mut total_prob = 0.0;
-	let mut expectation = 0.0;
-	for j in 0..=NUM_FLIPS {
-	    total_prob += probs[i][j];
-	    expectation += j as f64 * probs[i][j];
-	}
-	let cond_exp = expectation / total_prob;
-	let weight = if i > 0 { total_prob / i as f64 } else { 0.0 };
-	println!("{},{},{},{}", i, total_prob, weight, cond_exp);
+        let mut total_prob = 0.0;
+        let mut expectation = 0.0;
+        for j in 0..=NUM_FLIPS {
+            total_prob += probs[i][j];
+            expectation += j as f64 * probs[i][j];
+        }
+        let cond_exp = expectation / total_prob;
+        let weight = if i > 0 { total_prob / i as f64 } else { 0.0 };
+        println!("{},{},{},{}", i, total_prob, weight, cond_exp);
 
-	grand_total += total_prob;
-	exp_hh_again += cond_exp * total_prob;
-	exp_ratio_again += cond_exp * weight;
+        grand_total += total_prob;
+        exp_hh_again += cond_exp * total_prob;
+        exp_ratio_again += cond_exp * weight;
     }
 
     // And perform those sanity checks.
     assert!((grand_total - 1.0).abs() < 1e-7);
     assert!((exp_hh_again - exp_hh).abs() < 1e-7);
     assert!((exp_ratio_again - exp_ratio).abs() < 1e-7);
+
+    // Bonus: Calculate E(1/H)
+    let mut exp_h_recip = 0.0;
+
+    // Exclude H = 0.
+    for i in 1..=NUM_FLIPS {
+        let prob = probs[i].iter().sum::<f64>();
+        exp_h_recip += prob / i as f64;
+    }
+    println!("\nE(1/H),{}", exp_h_recip);
+    println!("1 / E(H),{}", exp_h.recip());
 }
