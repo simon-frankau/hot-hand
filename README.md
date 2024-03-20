@@ -35,8 +35,8 @@ The rest of this doc tries to explain why this is the case.
 For our calculations, we will need to know, for a given number of coin
 flips $N$, the probability of, in a sequence of $N+1$ flips, getting
 $H$ heads in the first $N$ flips, and $HH$ pairs of consecutive heads
-in $N+1$ flips. (Why the $N+1$ discrepancy? This is so that that $H =
-HT + HH$.
+in $N+1$ flips (Why the $N+1$ discrepancy? This is so that that $H =
+HT + HH$).
 
 The included program calculates these values. Or rather it calculates
 the number of sequences in each bucket, and you can divide through by
